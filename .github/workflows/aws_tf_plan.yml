@@ -39,12 +39,14 @@ jobs:
         run: |
           cd terraform
           terraform init
+        working-directory: ./terraform
       
       - name: Terraform Validate
         id: validate
         run: |
           cd terraform
           terraform validate
+        working-directory: ./terraform
 
       # Add tfsec scanning step
       - name: Install tfsec
@@ -59,12 +61,14 @@ jobs:
         run: |
           cd terraform
           tfsec
+        working-directory: ./terraform
 
       - name: Terraform Plan
         id: plan
         run: |
           cd terraform
           terraform plan
+        working-directory: ./terraform
         continue-on-error: true
       
       - name: Upload Plan
