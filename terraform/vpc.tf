@@ -1,6 +1,6 @@
 
 provider "aws" {
-  region = var.aws_region
+  region = "eu-west-2"
 }
 
 data "aws_availability_zones" "available" {}

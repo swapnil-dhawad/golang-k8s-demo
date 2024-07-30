@@ -38,16 +38,31 @@ jobs:
           cli_config_credentials_token: ${{ secrets.cli_config_credentials_token }}
 
       - name: Terraform Init
-        id: init
-        run: terraform init
+        run: |
+          cd terraform
+          terraform init
       
       - name: Terraform Validate
         id: validate
-        run: terraform validate
+        run: |
+          cd terraform
+          terraform validate
+
+      # Add tfsec scanning step
+      - name: Install tfsec
+        run: |
+          curl -sSL https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install.sh | sh
+
+      - name: Run tfsec
+        run: |
+          cd terraform
+          tfsec
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan
+        run: |
+          cd terraform
+          terraform plan
         continue-on-error: true
 
       - name: Terraform Plan Status
@@ -56,16 +71,3 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
-
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: arn:aws:iam::357171621133:role/github-oidc-role
-          role-session-name: samplerolesession
-          aws-region: us-west-2
-
-      - name: Print AWS SSM Parameter
-        run: aws ssm get-parameter --name=hello_aws-gh-oidc --query Parameter.Value
-
-      - name: Print assumed role
-        run: aws sts get-caller-identity
