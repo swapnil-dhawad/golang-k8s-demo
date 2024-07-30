@@ -71,7 +71,7 @@ jobs:
         if: steps.plan.outcome == 'failure'
         run: exit 1
 
-      - name: Terraform Plan
+      - name: Terraform Apply
         id: apply
         run: |
           cd terraform
