@@ -11,11 +11,11 @@ jobs:
       cli_config_credentials_token: ${{ secrets.TFC_API_TOKEN }}
   
 
-  Apply:
-    needs: Plan
-    uses: swapnil-dhawad/golang-k8s-demo/.github/workflows/aws_tf_apply.yml@main
-    with:
-      gh_environment: dev
-    secrets:
-      cli_config_credentials_token: ${{ secrets.TFC_API_TOKEN }}
+  #Apply:
+  #  needs: Plan
+  #  uses: swapnil-dhawad/golang-k8s-demo/.github/workflows/aws_tf_apply.yml@main
+  #  with:
+  #    gh_environment: dev
+  #  secrets:
+  #    cli_config_credentials_token: ${{ secrets.TFC_API_TOKEN }}
   
