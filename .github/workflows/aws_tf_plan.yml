@@ -50,16 +50,9 @@ jobs:
         id: plan
         run: |
           cd terraform
-          terraform plan -out=tfplan
+          terraform plan
         continue-on-error: true
-
-      - name: Upload Terraform Plan Artifact
-        if: steps.plan.outcome == 'success'
-        uses: actions/upload-artifact@v3
-        with:
-          name: terraform-plan
-          path: terraform/tfplan
-
+        
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
