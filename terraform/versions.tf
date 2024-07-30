@@ -27,4 +27,12 @@ terraform {
       version = "~> 2.2.0"
     }
   }
+ backend "remote" {
+		hostname = "app.terraform.io"
+		organization = "golang-k8s-demo"
+
+		workspaces {
+			name = "golang-k8s-demo"
+		}
+	}
 }
