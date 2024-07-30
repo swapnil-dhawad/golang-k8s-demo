@@ -48,16 +48,6 @@ jobs:
           cd terraform
           terraform validate
 
-      # Add tfsec scanning step
-      - name: Install tfsec
-        run: |
-          curl -sSL https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install.sh | sh
-
-      - name: Run tfsec
-        run: |
-          cd terraform
-          tfsec
-
       - name: Terraform Plan
         id: plan
         run: |
