@@ -1,4 +1,4 @@
-name: "Build_TF_Plan"
+name: "Apply_TF_Plan"
 on:
   workflow_call:
     inputs:
@@ -18,7 +18,7 @@ on:
         required: true
 
 jobs:
-  build-plan:
+  apply-plan:
     runs-on: ubuntu-latest
     environment: ${{ inputs.gh_environment }}
     defaults:
@@ -39,14 +39,12 @@ jobs:
         run: |
           cd terraform
           terraform init
-        working-directory: ./terraform
       
       - name: Terraform Validate
         id: validate
         run: |
           cd terraform
           terraform validate
-        working-directory: ./terraform
 
       # Add tfsec scanning step
       - name: Install tfsec
@@ -61,22 +59,21 @@ jobs:
         run: |
           cd terraform
           tfsec
-        working-directory: ./terraform
 
       - name: Terraform Plan
         id: plan
         run: |
           cd terraform
           terraform plan
-        working-directory: ./terraform
         continue-on-error: true
-      
-      - name: Upload Plan
-        uses: actions/upload-artifact@v2
-        with:
-          name: tfplan
-          path: terraform/tfplan
-          
+        
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
+
+      - name: Terraform Apply
+        id: apply
+        run: |
+          cd terraform
+          terraform apply -auto-approve
+        
