@@ -1,5 +1,4 @@
-### Reusable workflow to download terraform artifact built by `az_tf_plan` and apply the artifact/plan ###
-name: "Apply_TF_Plan"
+name: "Build_TF_Plan"
 on:
   workflow_call:
     inputs:
@@ -17,20 +16,18 @@ on:
       cli_config_credentials_token:
         description: 'cli config credentials token'
         required: true
-permissions:
-  id-token: write   # This is required for requesting the JWT
-  contents: read    # This is required for actions/checkout
+
 jobs:
-  apply-plan:
+  build-plan:
     runs-on: ubuntu-latest
     environment: ${{ inputs.gh_environment }}
     defaults:
       run:
-        shell: bash
+        shell: bash    
     steps:
       - name: Checkout
         uses: actions/checkout@v3.1.0
-
+        
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2.0.2
         with:
@@ -38,13 +35,16 @@ jobs:
           cli_config_credentials_token: ${{ secrets.cli_config_credentials_token }}
 
       - name: Terraform Init
-        run: terraform init
-        working-directory: ./terraform
+        id: init
+        run: |
+          cd terraform
+          terraform init
       
       - name: Terraform Validate
         id: validate
-        run: terraform validate
-        working-directory: ./terraform
+        run: |
+          cd terraform
+          terraform validate
 
       # Add tfsec scanning step
       - name: Install tfsec
@@ -56,23 +56,23 @@ jobs:
 
       - name: Run tfsec
         continue-on-error: true
-        run: tfsec
-        working-directory: ./terraform
+        run: |
+          cd terraform
+          tfsec
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -out=tfplan
-        working-directory: ./terraform
+        run: |
+          cd terraform
+          terraform plan
         continue-on-error: true
-
+      
       - name: Upload Plan
         uses: actions/upload-artifact@v2
         with:
           name: tfplan
           path: terraform/tfplan
-
+          
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
-
-      # Note: Terraform Apply is not included because it must be done in Terraform Cloud UI
