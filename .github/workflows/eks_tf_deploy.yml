@@ -13,7 +13,7 @@ jobs:
 
   Apply:
     needs: Plan
-    uses: swapnil-dhawad/golang-k8s-demo/.github/workflows/aws_tf_appy.yml@main
+    uses: swapnil-dhawad/golang-k8s-demo/.github/workflows/aws_tf_apply.yml@main
     with:
       gh_environment: dev
     secrets:
