@@ -17,6 +17,8 @@ spec:
     spec:
       containers:
       - name: go-web-app
-        image: swapnildhawad/go-web-app:{{ .Values.image.tag }}
+        image: 829669656648.dkr.ecr.eu-west-2.amazonaws.com/go-web-app:{{ .Values.image.tag }}
         ports:
         - containerPort: 8080
+      imagePullSecrets:
+      - name: ecr-registry-secret

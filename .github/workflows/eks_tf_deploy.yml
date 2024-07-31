@@ -1,5 +1,10 @@
 name: "eks_tf_deploy"
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'terraform/**'
   workflow_dispatch:
 
 jobs:
