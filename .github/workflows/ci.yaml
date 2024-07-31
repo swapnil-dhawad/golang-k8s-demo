@@ -87,7 +87,7 @@ jobs:
     - name: Build, tag, and push Docker image to ECR
       env:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-        ECR_REPOSITORY: golang-app-ecr  # Replace with your ECR repository name
+        ECR_REPOSITORY: go-web-app  # Replace with your ECR repository name
         IMAGE_TAG: ${{ github.run_id }}
       run: |
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
