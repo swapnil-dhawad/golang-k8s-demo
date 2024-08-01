@@ -1,11 +1,11 @@
 # Golang K8s Demo
 
-his project demonstrates a basic Golang application that delivers a "Hello, World!" page via HTTP. The application is containerized using Docker, uploaded to a Private Amazon Elastic Container Registry (ECR) through a Continuous Integration (CI) pipeline, and deployed to a Kubernetes cluster utilizing Helm and GitOps with Argo CD.
+This project demonstrates a basic Golang application that delivers a "Hello, World!" page via HTTP. The application is containerized using Docker, uploaded to a Private Amazon Elastic Container Registry (ECR) through a Continuous Integration (CI) pipeline, and deployed to a Kubernetes cluster utilizing Helm and GitOps with Argo CD.
 
 The application also exposes telemetry metrics using Prometheus.
 
 #
-![Architecture Diagram](./diagram.png)
+![Architecture Diagram](./images/diagram.png)
 
 ## Project Insights
 
@@ -39,29 +39,38 @@ The application also exposes telemetry metrics using Prometheus.
 - EKS
 - Helm
 - Prometheus
-- Terraform
+- Terraform Cloud
 - Argo CD
 
 ## How to Run the Application
 
-1. Any code commits specific to the application code or Dockerfile will be picked up by the GitHub Action workflow.
-   
-2. The CI workflow will be triggered and will perform the following actions:
-    - Build
-    - Unit test cases
-    - Linting checks
-    - SAST scanning
-    - Push to private ECR
-3. Image can be fetched from ECR and can be tested locally
+1. **Code Commits and GitHub Actions:**
+    - Any code commits, whether specific to the application code or the Dockerfile, will be detected by the GitHub Actions workflow.
+
+2. **CI Workflow Steps:**
+    - Upon triggering, the Continuous Integration (CI) workflow will perform the following actions:
+        - Build the application
+        - Execute unit test cases
+        - Perform linting checks
+        - Conduct Static Application Security Testing (SAST)
+        - Push the Docker image to a private Amazon Elastic Container Registry (ECR)
+
+3. **Testing the Docker Image Locally:**
+    - The Docker image can be fetched from ECR and tested locally.
+
    ![Home Page](./images/homepage.png)
 
+4. **Telemetry Metrics:**
+    - Monitor telemetry metrics for application insights.
 
-4. Telemetry metrics
-   
    ![Telemetry](./images/telemetry.png)
 
-5. Deployment part is handled via argocd. It is configured with github repo and constantly checking for any changes in specfic to helm charts, it constanlty watches the repo and sync the state available in github repo
+5. **Deployment with ArgoCD:**
+    - Deployment is managed via ArgoCD. It is configured with the GitHub repository and constantly checks for any changes specific to Helm charts. ArgoCD continuously watches the repository and synchronizes the state with the configurations available in the GitHub repository.
 
    ![ArgoCD](./images/argo.png)
-   
- 
+
+6. **Terraform Cloud for Provisioning EKS Cluster:**
+   - A GitHub Action has been configured to trigger the Terraform module responsible for creating the Terraform plan. The state is managed within Terraform Cloud. Once the plan is executed, an administrator can trigger `terraform apply`, which will provision the EKS cluster.
+
+   ![terraform cloud](./images/tfcloud)
