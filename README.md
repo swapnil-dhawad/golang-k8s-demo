@@ -42,3 +42,26 @@ The application also exposes telemetry metrics using Prometheus.
 - Terraform
 - Argo CD
 
+## How to Run the Application
+
+1. Any code commits specific to the application code or Dockerfile will be picked up by the GitHub Action workflow.
+   
+2. The CI workflow will be triggered and will perform the following actions:
+    - Build
+    - Unit test cases
+    - Linting checks
+    - SAST scanning
+    - Push to private ECR
+3. Image can be fetched from ECR and can be tested locally
+   ![Home Page](./homepage.png)
+
+
+4. Telemetry metrics
+   
+   ![Telemetry](./telemetry.png)
+
+5. Deployment part is handled via argocd. It is configured with github repo and constantly checking for any changes in specfic to helm charts, it constanlty watches the repo and sync the state available in github repo
+
+   ![ArgoCD](./argo.png)
+   
+ 
