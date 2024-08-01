@@ -7,19 +7,30 @@ The application also exposes telemetry metrics using Prometheus.
 #
 ![Architecture Diagram](./images/diagram.png)
 
-## Project Insights
+## Project Insights  
 
-- `main.go`: The main application code.
-- `main_test.go`: Unit tests for the application.
-- `Dockerfile`: Dockerfile for building the application image. Features added like multistaging build, use distroless image for reducing the size.
-- `helm/go-web-app-chart`: Helm chart for deploying the application. Jinja templating for image tag
-                            a.Pulling image form Private ECR
-                            b. Dynamically updating the image tag 
-- `github action workflow CI` : GitHub Actions is used to automate the CI part, including building the application, running tests, linting, security scanning SAST, 
-                              pushing the image in private ECR, dynamically updating the tag in deployment.yaml
-- `github action workflow integrated with Terraform Cloud` : GitHub Actions is used to automate the deployment of EKS cluster intergrating with TF cloud. 
-- `Terraform Cloud` : Terraform is used to provision the EKS cluster in AWS, with the state file managed in Terraform Cloud for governance and TF apply.
-- `GitOps` : Argo CD is installed on the EKS cluster to manage GitOps workflows, ensuring continuous synchronization of the deployment with the GitHub repository.
+- `main.go`: The main application code.  
+
+- `main_test.go`: Unit tests for the application.  
+
+- `Dockerfile`: Dockerfile for building the application image. Features added like multistaging build, use distroless image for reducing the size.  
+
+- `helm/go-web-app-chart`: Helm chart for deploying the application. Jinja templating for image tag  
+
+  a. Pulling image from Private ECR  
+
+  b. Dynamically updating the image tag  
+
+- `github action workflow CI`: GitHub Actions is used to automate the CI part, including building the application, running tests, linting, security scanning SAST,  
+
+  pushing the image in private ECR, dynamically updating the tag in deployment.yaml  
+
+- `github action workflow integrated with Terraform Cloud`: GitHub Actions is used to automate the deployment of EKS cluster integrating with TF cloud.  
+
+- `Terraform Cloud`: Terraform is used to provision the EKS cluster in AWS, with the state file managed in Terraform Cloud for governance and TF apply.  
+
+- `GitOps`: Argo CD is installed on the EKS cluster to manage GitOps workflows, ensuring continuous synchronization of the deployment with the GitHub repository.  
+
 
 ## Features
 
