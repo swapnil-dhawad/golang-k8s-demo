@@ -15,7 +15,7 @@ spec:
       labels:
         app: go-web-app
     spec:
-      containers:stat
+      containers:
       - name: go-web-app
         image: 829669656648.dkr.ecr.eu-west-2.amazonaws.com/go-web-app:{{ .Values.image.tag }}
         ports:
