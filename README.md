@@ -1,6 +1,8 @@
 # Golang K8s Demo
 
-This project demonstrates a simple Golang application that serves a "Hello, World!" page over HTTP. It is containerized using Docker and deployed to a Kubernetes cluster using Helm. The application also exposes telemetry metrics using Prometheus.
+his project demonstrates a basic Golang application that delivers a "Hello, World!" page via HTTP. The application is containerized using Docker, uploaded to a Private Amazon Elastic Container Registry (ECR) through a Continuous Integration (CI) pipeline, and deployed to a Kubernetes cluster utilizing Helm and GitOps with Argo CD.
+
+The application also exposes telemetry metrics using Prometheus.
 
 #
 ![Architecture Diagram](./diagram.png)
