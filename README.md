@@ -73,4 +73,4 @@ The application also exposes telemetry metrics using Prometheus.
 6. **Terraform Cloud for Provisioning EKS Cluster:**
    - A GitHub Action has been configured to trigger the Terraform module responsible for creating the Terraform plan. The state is managed within Terraform Cloud. Once the plan is executed, an administrator can trigger `terraform apply`, which will provision the EKS cluster.
 
-   ![terraform cloud](./images/tfcloud)
+   ![terraform cloud](./images/tfcloud.png)
