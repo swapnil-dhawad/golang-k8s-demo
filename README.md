@@ -53,15 +53,15 @@ The application also exposes telemetry metrics using Prometheus.
     - SAST scanning
     - Push to private ECR
 3. Image can be fetched from ECR and can be tested locally
-   ![Home Page](./homepage.png)
+   ![Home Page](./images/homepage.png)
 
 
 4. Telemetry metrics
    
-   ![Telemetry](./telemetry.png)
+   ![Telemetry](./images/telemetry.png)
 
 5. Deployment part is handled via argocd. It is configured with github repo and constantly checking for any changes in specfic to helm charts, it constanlty watches the repo and sync the state available in github repo
 
-   ![ArgoCD](./argo.png)
+   ![ArgoCD](./images/argo.png)
    
  

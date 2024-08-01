@@ -10,6 +10,7 @@ on:
       - 'k8s/**'
       - 'README.md'
       - 'terraform/**'
+      - 'images/**'
       - '.github/workflows/eks_tf_deploy.yml'
       - '.github/workflows/aws_tf_plan.yml'
 
