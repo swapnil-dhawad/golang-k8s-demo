@@ -40,6 +40,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 	"testing"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func TestWelcomePage(t *testing.T) {
