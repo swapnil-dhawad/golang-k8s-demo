@@ -36,10 +36,10 @@ The application also exposes telemetry metrics using Prometheus.
 
 - Simple HTTP server written in Golang.
 - Exposes telemetry metrics using Prometheus.
-- Containerized using Docker.
+- Containerized using Docker, emphasis on layring, distroless image.
 - Deployed to EKS using Helm.
 - Uses GitHub Actions for CI/CD pipeline.
-- EKS cluster setup using Terraform.
+- EKS cluster setup using Terraform Cloud.
 - GitOps with Argo CD for continuous deployment.
 
 ## Prerequisites
