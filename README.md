@@ -2,7 +2,7 @@
 
 This project demonstrates a simple Golang application that serves a "Hello, World!" page over HTTP. It is containerized using Docker and deployed to a Kubernetes cluster using Helm. The application also exposes telemetry metrics using Prometheus.
 
-# Diagaram
+#
 ![Architecture Diagram](./diagram.png)
 
 ## Project Insights
