@@ -30,6 +30,7 @@ This project demonstrates a simple Golang application that serves a "Hello, Worl
 
 - Golang 1.22.5 or later
 - Docker
+- Prometheus
 - EKS
 - Helm
 - Prometheus
