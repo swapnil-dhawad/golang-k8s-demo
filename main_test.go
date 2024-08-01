@@ -3,33 +3,31 @@
 package main
 
 import (
-    "net/http"
-    "net/http/httptest"
-    "testing"
-	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"net/http"
+	"net/http/httptest"
+	"testing"
 )
 
-func TestMetricsEndpoint(t *testing.T) {
-    req, err := http.NewRequest("GET", "/metrics", nil)
-    if err != nil {
-        t.Fatal(err)
-    }
+func TestMain(t *testing.T) {
+	req, err := http.NewRequest("GET", "/welcome", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
 
-    rr := httptest.NewRecorder()
-    handler := promhttp.Handler()
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(welcomePage)
 
-    handler.ServeHTTP(rr, req)
+	handler.ServeHTTP(rr, req)
 
-    if status := rr.Code; status != http.StatusOK {
-        t.Errorf("metrics handler returned wrong status code: got %v want %v",
-            status, http.StatusOK)
-    }
+	if status := rr.Code; status != http.StatusOK {
+		t.Errorf("handler returned wrong status code: got %v want %v",
+			status, http.StatusOK)
+	}
 
-    // Check if the Content-Type is correct
-    expected := "text/plain; version=0.0.4; charset=utf-8"
-    if contentType := rr.Header().Get("Content-Type"); contentType != expected {
-        t.Errorf("metrics handler returned unexpected content type: got %v want %v",
-            contentType, expected)
-    }
+	// Just verify the code not html content
+	expected := "text/html; charset=utf-8"
+	if contentType := rr.Header().Get("Content-Type"); contentType != expected {
+		t.Errorf("handler returned unexpected content type: got %v want %v",
+			contentType, expected)
+	}
 }
